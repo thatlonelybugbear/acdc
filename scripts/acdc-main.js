@@ -7,7 +7,7 @@ function showTokenControlsButton(controls) {
 		let i = token.tools.length;
 		token.tools.splice(i, 0, {
 			name: 'ACDC',
-			title: game.i18n.localize('acdc.buttonHint'),
+			title: localize('acdc.buttonHint'),
 			icon: 'fa-solid fa-r',
 			visible: true,
 			onClick: changeDiceRollConfig,
@@ -28,5 +28,9 @@ async function changeDiceRollConfig() {
 	for (const dice in config) config[dice] = isManual ? '' : 'manual';
 	await game.settings.set('core', 'diceConfiguration', config);
 	await game.user.setFlag('acdc', 'currentDiceConfig', isManual ? 'auto' : 'manual');
-	ui.notifications.info(`Foundry dice rolls are now ${isManual ? 'auto' : 'manual'}`);
+	ui.notifications.info(localize(isManual ? 'acdc.auto' : 'acdc.manual'));
+}
+
+function localize(string) {
+	return game.i18n.localize(string);
 }
