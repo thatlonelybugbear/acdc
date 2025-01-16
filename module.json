@@ -16,7 +16,7 @@
         "maximum": "12",
         "verified": "12.331"
     },
-    "esmodules": ["scripts/acdc-main.mjs"],
+    "esmodules": ["module/acdc-main.mjs"],
     "languages": [
         {
             "lang": "en",
