@@ -1,1 +1,40 @@
-
+{
+    "id": "acdc",
+    "title": "Alter Core Dice Configuration",
+    "description": "A small module to set Foundry core dice configuration",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "thatlonelybugbear",
+            "url": "https://github.com/thatlonelybugbear",
+            "discord": "thatlonelybugbear#4394",
+            "ko-fi": "https://ko-fi.com/thatlonelybugbear"
+        }
+    ],
+    "compatibility": {
+        "minimum": "12",
+        "maximum": "12",
+        "verified": "12.331"
+    },
+    "esmodules": ["scripts/acdc-main.mjs"],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json",
+            "flags": {}
+        }
+    ],
+    "flags": {
+        "hotReload": {
+            "extensions": ["json"],
+            "paths": ["lang/en.json"]
+        }
+    },
+    "bugs": "https://github.com/thatlonelybugbear/acdc/issues",
+    "url": "https://github.com/thatlonelybugbear/acdc",
+    "license": "https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/LICENSE",
+    "manifest": "https://github.com/thatlonelybugbear/acdc/releases/latest/download/module.json",
+    "download": "https://github.com/thatlonelybugbear/acdc/releases/download/v0.0.1/module.zip",
+    "changelog": "https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/Changelog.md"
+}
