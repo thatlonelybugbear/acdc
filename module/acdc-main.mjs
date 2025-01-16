@@ -15,9 +15,9 @@ Hooks.on('getSceneControlButtons', (controls) => {
 
 async function changeDiceRollConfig() {
 	const config = game.settings.get('core', 'diceConfiguration');
-	const isManual = game.user.getFlag('world', 'currentDiceConfig') === 'manual';
+	const isManual = game.user.getFlag('acdc', 'currentDiceConfig') === 'manual';
 	for (const dice in config) config[dice] = isManual ? '' : 'manual';
 	await game.settings.set('core', 'diceConfiguration', config);
-	await game.user.setFlag('world', 'currentDiceConfig', isManual ? 'auto' : 'manual');
+	await game.user.setFlag('acdc', 'currentDiceConfig', isManual ? 'auto' : 'manual');
 	ui.notifications.info(`Foundry dice rolls are now ${isManual ? 'auto' : 'manual'}`);
 }
