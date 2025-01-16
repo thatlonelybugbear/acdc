@@ -1,3 +1,5 @@
 {
-  "acdc.buttonHint": "Alter Core Dice Configuration"
+  "acdc.buttonHint": "Alter Core Dice Configuration",
+  "acdc.manual": "Foundry dice rolls are now manual!",
+  "acdc.auto": "Foundry dice rolls are now automatic!",
 }
