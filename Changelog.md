@@ -1,3 +1,6 @@
+## v0.0.5
+- Make sure that it works on initial module run.
+
 ## v0.0.4
 - The Button will be shown only if the user has permission to Make Manual Rolls.
   
