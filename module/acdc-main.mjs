@@ -1,4 +1,7 @@
-Hooks.on('getSceneControlButtons', (controls) => {
+Hooks.on('getSceneControlButtons', showTokenControlsButton);
+
+function showTokenControlsButton(controls) {
+	if (!game.permissions.MANUAL_ROLLS.includes(game.user.role)) return;
 	let token = controls.find((c) => c.name === 'token');
 	if (token) {
 		let i = token.tools.length;
@@ -11,7 +14,7 @@ Hooks.on('getSceneControlButtons', (controls) => {
 			button: true,
 		});
 	}
-});
+}
 
 async function changeDiceRollConfig() {
 	const config = game.settings.get('core', 'diceConfiguration');
