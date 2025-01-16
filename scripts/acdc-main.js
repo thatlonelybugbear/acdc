@@ -18,7 +18,13 @@ function showTokenControlsButton(controls) {
 
 async function changeDiceRollConfig() {
 	const config = game.settings.get('core', 'diceConfiguration');
-	const isManual = game.user.getFlag('acdc', 'currentDiceConfig') === 'manual';
+	let initialRun = false;  //the default state is {}
+	if (foundry.utils.isEmpty(config)) {
+		initialRun = true;
+		for (const fullfillmentDice in CONFIG.Dice.fulfillment.dice) 
+			config[fullfillmentDice] = '';
+	}
+	const isManual = !initialRun && game.user.getFlag('acdc', 'currentDiceConfig') === 'manual';
 	for (const dice in config) config[dice] = isManual ? '' : 'manual';
 	await game.settings.set('core', 'diceConfiguration', config);
 	await game.user.setFlag('acdc', 'currentDiceConfig', isManual ? 'auto' : 'manual');
