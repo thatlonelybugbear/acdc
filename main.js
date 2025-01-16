@@ -4,7 +4,7 @@ Hooks.on('getSceneControlButtons', (controls) => {
 		let i = token.tools.length;
 		token.tools.splice(i, 0, {
 			name: 'ACDC',
-			title: 'Alter Core DiceRoller Config',
+			title: game.i18n.localize('acdc.buttonHint'),
 			icon: 'fa-solid fa-r',
 			visible: true,
 			onClick: changeDiceRollConfig,
