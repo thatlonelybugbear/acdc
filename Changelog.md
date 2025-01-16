@@ -1,4 +1,4 @@
-## 0.0.3
+## v0.0.3
 - Make use of proper module namespace.
 
 ## Initial release
