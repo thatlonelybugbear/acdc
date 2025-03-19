@@ -3,19 +3,19 @@ Hooks.on('getSceneControlButtons', showTokenControlsButton);
 function showTokenControlsButton(controls) {
 	if (!game.permissions.MANUAL_ROLLS.includes(game.user.role)) return;
 	const active = !!getCDC(game.settings.get('core', 'diceConfiguration'));
-	const token = controls.find((c) => c.name === 'token');
-	if (token) {
-		const i = token.tools.length;
-		token.tools.splice(i, 0, {
-			name: 'ACDC',
+	const tools = controls.tokens?.tools;
+	if (tools) {
+		const order = Object.keys(tools).findLastIndex(i=>i) + 1;
+		tools.acdc = {
+			name: 'acdc',
+			order,
 			title: localize('acdc.buttonHint'),
 			icon: 'fa-solid fa-r',
 			visible: true,
 			toggle: true,
-			onClick: changeDiceRollConfig,
-			button: true,
+			onChange: changeDiceRollConfig,
 			active,
-		});
+		};
 	}
 }
 

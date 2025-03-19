@@ -1,3 +1,6 @@
+## v0.0.7
+- Foundry v13 compatibility
+
 ## v0.0.6
 - Make the Button a togglable element that is active if Rolls are supposed to be manual.
 
