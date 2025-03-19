@@ -1,3 +1,6 @@
+## v0.0.8
+- Makes sure that ACDC dual supports v12 and v13.
+
 ## v0.0.7
 - Foundry v13 compatibility
 
