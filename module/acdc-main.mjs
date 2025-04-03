@@ -113,9 +113,9 @@ Hooks.once('init', () => {
 	});
 	game.keybindings.register('acdc', 'keybind', {
 		name: 'ACDC.Keybind',
-		editable: [{ key: 'KeyR' }],
+		editable: [{ key: 'KeyB' }],
 		restricted: false,
-		reservedModifiers: ['Ctrl', 'Shift'],
+		reservedModifiers: ['Control', 'Shift'],
 	});
 });
 
