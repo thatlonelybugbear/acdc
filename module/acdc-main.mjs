@@ -111,7 +111,7 @@ Hooks.once('init', () => {
 		type: Boolean,
 		default: false,
 	});
-game.keybindings.register('acdc', 'keybind', {
+	game.keybindings.register('acdc', 'keybind', {
 		name: 'ACDC.Keybind',
 		editable: [{ key: 'KeyR' }],
 		restricted: false,
