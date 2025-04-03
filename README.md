@@ -1,5 +1,4 @@
 # Alter Core Dice Configuration
-
 ![Latest Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/module.json&label=Token%20Warp%20Version&query=$.version&colorB=yellow&style=for-the-badge)
 ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/module.json&label=Foundry%20Version&query=$.compatibility.minimum&colorB=ff6400&style=for-the-badge)
 ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/module.json&label=Foundry%20Version&query=$.compatibility.verified&colorB=ff6400&style=for-the-badge)
@@ -10,11 +9,14 @@
 ![Latest Release Download Count](https://img.shields.io/github/downloads/thatlonelybugbear/acdc/latest/total?color=2b82fc&label=LATEST%20DOWNLOADS&style=for-the-badge)
 [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https://forge-vtt.com/api/bazaar/package/acdc&colorB=68a74f&style=for-the-badge)](https://forge-vtt.com/bazaar#package=tokenwarp)
 
-A small module to set Foundry core dice configuration.
+#### A system agnostic module to quickly toggle between manual and auto Foundry core dice configuration!
+If an user has a role with permission to make manual rolls in the first place, a button (icon R) will be added to the client's Token Controls sidebar.
+- `Click` on it to toggle between Foundry's manual and auto dice rolling.
+- `SHIFT + Click` to open the Foundry Configure Dice settings menu and set specific only dice to manual.
 
-Quickly toggles between Manual rolls and auto rolls for all dice, when a user clicks the R button inserted in the left sidebar of Foundry in Token Controls.
-
-The button will only be shown if the user has a role with permission to make manual rolls in the first place.
+Added functionality by providing a hotkey (default B) to avoid clicking on the Token Controls ACDC button.
+- `CTRL + B` toggles between manual and auto dice rolling.
+- `SHIFT + B` opens the Foundry Configure Dice settings menu.
 
 How to use!
 
