@@ -115,7 +115,7 @@ Hooks.once('init', () => {
 		name: 'ACDC.Keybind',
 		editable: [{ key: 'KeyR' }],
 		restricted: false,
-		reservedModifiers: ['Shift'],
+		reservedModifiers: ['Ctrl', 'Shift'],
 	});
 });
 
