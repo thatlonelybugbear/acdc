@@ -121,7 +121,7 @@ Hooks.once('init', () => {
 
 Hooks.on('ready', () => {
 	document.addEventListener('keydown', (event) => {
-		if (game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) acdcMenu();
+		if ((event.ctrlKey || event.shiftKey) && game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) acdcMenu();
 	});
 });
 
