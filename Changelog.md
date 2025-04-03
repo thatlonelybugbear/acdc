@@ -1,3 +1,6 @@
+## v1.0.0
+- Add per dice manual toggles
+
 ## v0.0.8
 - Makes sure that ACDC dual supports v12 and v13.
 

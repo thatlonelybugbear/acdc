@@ -1,5 +1,11 @@
 {
-  "acdc.buttonHint": "Alter Core Dice Configuration",
-  "acdc.manual": "Foundry dice rolls are now manual!",
-  "acdc.auto": "Foundry dice rolls are now automatic!"
+  "ACDC": {
+    "ButtonHint": "Alter Core Dice Configuration",
+    "Manual": "Foundry dice rolls are now manual!",
+    "Auto": "Foundry dice rolls are now automatic!",
+    "SelectedManual": "User selected Foundry dice rolls are now manual!",
+    "Config": "ACDC Controls",
+    "ToggleMode": "Toggle Mode",
+    "Keybind": "Toggle ACDC rolling mode"
+  }
 }
