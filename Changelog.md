@@ -1,5 +1,9 @@
 ## v1.0.0
-- Add per dice manual toggles
+- Adds per dice manual toggles
+  - Shift + Left Click on the ACDC button will open the Foundry Dice Configuration Menu and ACDC will then toggle only the user specified dice for manual rolling.
+- Adds a key bind for ACDC toggles, default R.
+  - Pressing Shift + R will open the Foundry Dice Configuration Menu.
+- Adds a toolclip, shown when the Core setting for Showing Toolclips on Hover is enabled.
 
 ## v0.0.8
 - Makes sure that ACDC dual supports v12 and v13.
