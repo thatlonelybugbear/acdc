@@ -1,7 +1,8 @@
-## v1.0.0
+## v1.0.1
 - Adds per dice manual toggles
   - Shift + Left Click on the ACDC button will open the Foundry Dice Configuration Menu and ACDC will then toggle only the user specified dice for manual rolling.
 - Adds a key bind for ACDC toggles, default R.
+  - Pressing Ctrl + R will toggle the ACDC roll mode.
   - Pressing Shift + R will open the Foundry Dice Configuration Menu.
 - Adds a toolclip, shown when the Core setting for Showing Toolclips on Hover is enabled.
 
