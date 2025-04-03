@@ -111,4 +111,17 @@ Hooks.once('init', () => {
 		type: Boolean,
 		default: false,
 	});
+	game.keybindings.register('acdc', 'keybind', {
+		name: 'ACDC.Keybind',
+		editable: [{ key: 'KeyR' }],
+		restricted: false,
+		reservedModifiers: ['Shift'],
+	});
 });
+
+Hooks.on('ready', () => {
+	document.addEventListener('keydown', (event) => {
+		if (game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) acdcMenu();
+	});
+});
+
