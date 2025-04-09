@@ -121,7 +121,18 @@ Hooks.once('init', () => {
 
 Hooks.on('ready', () => {
 	document.addEventListener('keydown', (event) => {
-		if ((event.ctrlKey || event.shiftKey) && game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) acdcMenu();
+		const active = document.activeElement;
+		const isTyping = active && (
+			active.tagName === 'INPUT' ||
+			active.tagName === 'TEXTAREA' ||
+			active.isContentEditable
+		);
+	
+		if (isTyping) return;
+	
+		// Trigger keybind logic if not typing
+		if ((event.ctrlKey || event.shiftKey) && game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) {
+			acdcMenu();
+		}
 	});
 });
-
