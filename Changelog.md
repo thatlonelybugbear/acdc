@@ -1,3 +1,6 @@
+## v1.0.2
+- Stops ACDC from triggering the Dice Config Menu when typing in text fields.
+
 ## v1.0.1
 - Adds per dice manual toggles
   - Shift + Left Click on the ACDC button will open the Foundry Dice Configuration Menu and ACDC will then toggle only the user specified dice for manual rolling.
