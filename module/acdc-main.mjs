@@ -48,7 +48,10 @@ function showTokenControlsButton(controls) {
 
 function acdcMenu() {
 	if (!event.shiftKey) return changeDiceRollConfig();
-	else return new DiceConfig().render(true);
+	else {
+		if (game.version > 13) return new foundry.applications.settings.menus.DiceConfig().render(true);
+		else return new DiceConfig().render(true);
+	}
 }
 async function changeDiceRollConfig() {
 	const config = game.settings.get('core', 'diceConfiguration'); //the default state is {}
@@ -56,7 +59,11 @@ async function changeDiceRollConfig() {
 	const isManual = getCDC(config);
 	if (isManual === null) {
 		for (const fullfillmentDice in CONFIG.Dice.fulfillment.dice) config[fullfillmentDice] = '';
-	} else for (const dice in config) config[dice] = isManual ? '' : acdcConfig.includes(dice) ? 'manual' : '';
+	} else {
+		for (const dice in config) {
+			config[dice] = isManual ? '' : !acdcConfig?.length || acdcConfig?.includes(dice) ? 'manual' : '';
+		}
+	}
 	await game.settings.set('core', 'diceConfiguration', config);
 	await game.user.setFlag('acdc', 'currentDiceConfig', isManual ? 'auto' : 'manual');
 	ui.notifications.info(localize(isManual ? 'ACDC.Auto' : !acdcConfig.length ? 'ACDC.Manual' : 'ACDC.SelectedManual'));
@@ -75,25 +82,20 @@ Hooks.on('renderDiceConfig', (app, html) => {
 	const debug = game.settings.get('acdc', 'debug');
 	if (debug) console.log('ACDC debug: DiceConfig Opened - Injecting Custom Save Behavior');
 
-	if (!app._originalUpdateObject) {
-		app._originalUpdateObject = app._updateObject;
+	const form = app.form;
+	if (!form) return;
 
-		app._updateObject = async function (event, formData) {
-			if (debug) console.log('ACDC debug: Intercepted Save - Storing User Preferences');
+	form.addEventListener('submit', async (event, debug) => {
+		setTimeout(async () => {
+			const config = game.settings.get('core', 'diceConfiguration');
 
-			await game.settings.set('core', 'diceConfiguration', formData);
-
-			const manualDice = Object.entries(formData)
-				.filter(([key, value]) => value === 'manual')
-				.map(([key]) => key);
-
+			const manualDice = Object.entries(config)
+				.filter(([_, method]) => method === 'manual')
+				.map(([denomination]) => denomination);
 			await game.settings.set('acdc', 'manualDice', manualDice);
-
-			if (debug) console.log('ACDC debug: Manual Dice Saved:', manualDice);
-
-			return this._originalUpdateObject(event, formData);
-		};
-	}
+			if (debug) console.log('ACDC - manualDice updated:', manualDice);
+		}, 0);
+	});
 });
 
 Hooks.once('init', () => {
@@ -122,14 +124,10 @@ Hooks.once('init', () => {
 Hooks.on('ready', () => {
 	document.addEventListener('keydown', (event) => {
 		const active = document.activeElement;
-		const isTyping = active && (
-			active.tagName === 'INPUT' ||
-			active.tagName === 'TEXTAREA' ||
-			active.isContentEditable
-		);
-	
+		const isTyping = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable);
+
 		if (isTyping) return;
-	
+
 		// Trigger keybind logic if not typing
 		if ((event.ctrlKey || event.shiftKey) && game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) {
 			acdcMenu();
