@@ -1,3 +1,6 @@
+## v1.0.3
+- Fixes for Foundry v13.341 stable release.
+
 ## v1.0.2
 - Stops ACDC from triggering the Dice Config Menu when typing in text fields.
 
