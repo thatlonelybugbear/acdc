@@ -1,3 +1,6 @@
+## v13.345.1
+* Versioning changes for indicating compatibility with Foundry version easily
+
 ## v1.0.3
 - Fixes for Foundry v13.341 stable release.
 
