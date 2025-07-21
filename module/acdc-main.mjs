@@ -119,10 +119,9 @@ Hooks.once('init', () => {
 			type: Boolean,
 		});
 	};
-
 	const cprModule = game.modules.get('chris-premades');
 	if (cprModule?.active) {
-		if (foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
+		if (game.version < 13 && foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
 			Hooks.once('cprInitComplete', cprIntegrationSettings);
 		}
 		else cprIntegrationSettings();
