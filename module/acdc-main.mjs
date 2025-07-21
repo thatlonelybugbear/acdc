@@ -99,13 +99,15 @@ Hooks.on('renderDiceConfig', (app, html) => {
 });
 
 Hooks.once('init', () => {
-	game.settings.register('acdc', 'cprManualRollToggle', {
-		name: 'ACDC.CPR_INTEGRATION_TOGGLE.NAME',
-		hint: 'ACDC.CPR_INTEGRATION_TOGGLE.HINT',
-		scope: 'world',
-		config: true,
-		default: false,
-		type: Boolean,
+	Hooks.once('cprInitComplete', () => {
+		game.settings.register('acdc', 'cprManualRollToggle', {
+			name: 'ACDC.CPR_INTEGRATION_TOGGLE.NAME',
+			hint: 'ACDC.CPR_INTEGRATION_TOGGLE.HINT',
+			scope: 'world',
+			config: true,
+			default: false,
+			type: Boolean,
+		});
 	});
 	game.settings.register('acdc', 'manualDice', {
 		name: 'Manual Dice Selection',
