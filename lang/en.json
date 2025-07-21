@@ -6,6 +6,10 @@
     "SelectedManual": "User selected Foundry dice rolls are now manual!",
     "Config": "ACDC Controls",
     "ToggleMode": "Toggle Mode",
-    "Keybind": "Toggle ACDC rolling mode"
+    "Keybind": "Toggle ACDC rolling mode",
+    "CPR_INTEGRATION_TOGGLE": {
+      "NAME": "Toggle the CPR Manual Rolls",
+      "HINT": "You will need to revise the CPR Manual Rolls settings too to make this work properly"
+    }
   }
 }
