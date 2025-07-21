@@ -1,3 +1,10 @@
+## v13.346.1
+- CPR Manual Rolls integration
+  - If CPR is active and the ACDC setting is set to use CPR's manual rolls, the toggle button will **only** enable/disable the CPR's Manual Rolls option.
+  - The GM will still need to set all the right CPR's Manual Rolls settings as needed for the users etc.
+  - Let me know of bugs or what else might be needed.
+- Verified for Foundry v13.346
+ 
 ## v13.345.1
 * Versioning changes for indicating compatibility with Foundry version easily
 
