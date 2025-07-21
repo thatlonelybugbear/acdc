@@ -47,13 +47,23 @@ function showTokenControlsButton(controls) {
 }
 
 function acdcMenu() {
-	if (!event.shiftKey) return changeDiceRollConfig();
+	const cprManualRollToggle = game.settings.get('acdc', 'cprManualRollToggle');
+	if (cprManualRollToggle || !event.shiftKey) return changeDiceRollConfig();
 	else {
 		if (game.version > 13) return new foundry.applications.settings.menus.DiceConfig().render(true);
 		else return new DiceConfig().render(true);
 	}
 }
 async function changeDiceRollConfig() {
+	const cprManualRollToggle = game.modules.get('chris-premades')?.active ? game.settings.get('acdc', 'cprManualRollToggle') : false;
+	if (cprManualRollToggle) {
+		const key = 'manualRollsEnabled';
+		const scope = 'chris-premades';
+		const cprManualRollsEnabled = game.settings.get(scope, key);
+		await game.settings.set(scope, key, !cprManualRollsEnabled);
+		await game.user.setFlag('acdc', 'currentDiceConfig', cprManualRollsEnabled ? 'auto' : 'manual');
+		return ui.notifications.info(localize(cprManualRollsEnabled ? 'ACDC.Auto' : 'ACDC.CPR_INTEGRATION_TOGGLE.Manual'));
+	}
 	const config = game.settings.get('core', 'diceConfiguration'); //the default state is {}
 	const acdcConfig = game.settings.get('acdc', 'manualDice');
 	const isManual = getCDC(config);
@@ -99,6 +109,23 @@ Hooks.on('renderDiceConfig', (app, html) => {
 });
 
 Hooks.once('init', () => {
+	function cprIntegrationSettings () {
+		game.settings.register('acdc', 'cprManualRollToggle', {
+			name: 'ACDC.CPR_INTEGRATION_TOGGLE.NAME',
+			hint: 'ACDC.CPR_INTEGRATION_TOGGLE.HINT',
+			scope: 'world',
+			config: true,
+			default: false,
+			type: Boolean,
+		});
+	};
+	const cprModule = game.modules.get('chris-premades');
+	if (cprModule?.active) {
+		if (game.version < 13 && foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
+			Hooks.once('cprInitComplete', cprIntegrationSettings);
+		}
+		else cprIntegrationSettings();
+	}
 	game.settings.register('acdc', 'manualDice', {
 		name: 'Manual Dice Selection',
 		scope: 'client',
