@@ -1,3 +1,6 @@
+## v13.346.2
+- Quick fix for when the ACDC setting for CPR is not registered.
+
 ## v13.346.1
 - CPR Manual Rolls integration
   - If CPR is active and the ACDC setting is set to use CPR's manual rolls, the toggle button will **only** enable/disable the CPR's Manual Rolls option.
