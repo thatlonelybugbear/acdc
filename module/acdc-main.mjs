@@ -47,7 +47,7 @@ function showTokenControlsButton(controls) {
 }
 
 function acdcMenu() {
-	const cprManualRollToggle = game.settings.get('acdc', 'cprManualRollToggle');
+	const cprManualRollToggle = game.modules.get('chris-premades')?.active ? game.settings.get('acdc', 'cprManualRollToggle') : false;
 	if (cprManualRollToggle || !event.shiftKey) return changeDiceRollConfig();
 	else {
 		if (game.version > 13) return new foundry.applications.settings.menus.DiceConfig().render(true);
