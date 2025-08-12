@@ -1,3 +1,6 @@
+## v13.347.1
+* Foundry v13.347 compatibility bump
+
 ## v13.346.2
 - Quick fix for when the ACDC setting for CPR is not registered.
 
