@@ -1,0 +1,16 @@
+{
+  "ACDC": {
+    "ButtonHint": "Alter Core Dice Configuration",
+    "Manual": "I tiri di dado di Foundry sono ora manuali!",
+    "Auto": "I tiri di dado di Foundry sono ora automatici!",
+    "SelectedManual": "L'utente ha selezionato i tiri di dado manuali in Foundry!",
+    "Config": "Controlli ACDC",
+    "ToggleMode": "Cambia modalità",
+    "Keybind": "Attiva/disattiva la modalità di tiro ACDC",
+    "CPR_INTEGRATION_TOGGLE": {
+      "NAME": "Attiva/disattiva i tiri manuali CPR",
+      "HINT": "Dovrai rivedere anche le impostazioni dei tiri manuali CPR per farlo funzionare correttamente",
+      "Manual": "I tiri di dado di Foundry ora usano la finestra di dialogo dei tiri manuali CPR!"
+    }
+  }
+}
