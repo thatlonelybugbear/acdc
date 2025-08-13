@@ -1,3 +1,6 @@
+## v13.347.2
+* Updated Italian translation by [GregoryWarn](<https://github.com/GregoryWarn>) 🤗
+
 ## v13.347.1
 * Foundry v13.347 compatibility bump
 
