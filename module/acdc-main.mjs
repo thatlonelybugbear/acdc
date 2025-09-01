@@ -157,6 +157,7 @@ Hooks.on('ready', () => {
 
 		// Trigger keybind logic if not typing
 		if ((event.ctrlKey || event.shiftKey) && game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) {
+			event.preventDefault();
 			acdcMenu();
 		}
 	});
