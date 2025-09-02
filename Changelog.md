@@ -1,3 +1,7 @@
+## v13.348.1
+* Verified for Foundry v13.348
+* Prevent hotkeys triggering Browser actions via [#22](<https://github.com/thatlonelybugbear/acdc/pull/22>) by [ThiefMaster](<https://github.com/ThiefMaster>) 👍
+
 ## v13.347.2
 * Updated Italian translation by [GregoryWarn](<https://github.com/GregoryWarn>) 🤗
 
