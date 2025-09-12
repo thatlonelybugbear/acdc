@@ -151,12 +151,17 @@ Hooks.once('init', () => {
 Hooks.on('ready', () => {
 	document.addEventListener('keydown', (event) => {
 		const active = document.activeElement;
-		const isTyping = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable);
+		const isTypingPlain = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
+		const isTypingEditor = active && active.isContentEditable;
 
-		if (isTyping) return;
+		// We only support the shortcut with modifiers.
+		if (!event.ctrlKey && !event.shiftKey) return;
+		// The WYSIWYG editor uses CTRL+B to toggle bold --> no shortcut in there.
+		if (isTypingEditor) return;
+		// In the normal editor we ignore SHIFT+B because writing a literal B is something people want to do....
+		if (isTypingPlain && event.shiftKey) return;
 
-		// Trigger keybind logic if not typing
-		if ((event.ctrlKey || event.shiftKey) && game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) {
+		if (game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) {
 			event.preventDefault();
 			acdcMenu();
 		}
