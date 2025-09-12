@@ -1,3 +1,6 @@
+## v13.348.2
+* Support CTRL+B while focusing a text field via [#24](<https://github.com/thatlonelybugbear/acdc/pull/24>) by [ThiefMaster](<https://github.com/ThiefMaster>) 👍
+
 ## v13.348.1
 * Verified for Foundry v13.348
 * Prevent hotkeys triggering Browser actions via [#22](<https://github.com/thatlonelybugbear/acdc/pull/22>) by [ThiefMaster](<https://github.com/ThiefMaster>) 👍
