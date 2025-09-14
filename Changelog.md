@@ -1,3 +1,6 @@
+## v13.348.3
+* Rework the keybinds to use Foundry's API.
+
 ## v13.348.2
 * Support CTRL+B while focusing a text field via [#24](<https://github.com/thatlonelybugbear/acdc/pull/24>) by [ThiefMaster](<https://github.com/ThiefMaster>) 👍
 
