@@ -51,7 +51,7 @@ function showTokenControlsButton(controls) {
 }
 
 Hooks.on('renderSceneControls', () => {
-	const btn = document.querySelector('button[data-tool="acdc"]');
+	const btn = document.querySelector('[data-tool="acdc"], [data-tool="ACDC"]');
 	if (!btn) return;
 
 	btn.addEventListener(
@@ -171,7 +171,7 @@ Hooks.once('init', () => {
 
 			// should ctrl+B toggle ACDC mode only when the token controls are active? Worth trying to make it global?
 			if (ev.ctrlKey) {
-				const btn = document.querySelector('button[data-tool="acdc"]');
+				const btn = document.querySelector('[data-tool="acdc"], [data-tool="ACDC"]');
 				if (btn) {
 					btn.dispatchEvent(
 						new MouseEvent('click', {
