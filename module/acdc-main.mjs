@@ -1,5 +1,9 @@
 Hooks.on('getSceneControlButtons', showTokenControlsButton);
 
+const isV13 = () => {
+	return game.version > 13;
+};
+
 function showTokenControlsButton(controls) {
 	if (!game.permissions.MANUAL_ROLLS.includes(game.user.role)) return;
 	const active = !!getCDC(game.settings.get('core', 'diceConfiguration'));
@@ -11,7 +15,7 @@ function showTokenControlsButton(controls) {
 			shiftClick: { heading: 'DICE.CONFIG.Label', reference: 'CONTROLS.ShiftClick' },
 		},
 	};
-	if (game.version > 13) {
+	if (isV13) {
 		const tools = controls.tokens?.tools;
 		if (tools) {
 			const order = Object.keys(tools).findLastIndex((i) => i) + 1;
@@ -22,7 +26,7 @@ function showTokenControlsButton(controls) {
 				icon: 'fa-solid fa-r',
 				visible: true,
 				toggle: true,
-				onChange: acdcMenu,
+				onChange: changeDiceRollConfig,
 				active,
 				toolclip,
 			};
@@ -37,7 +41,7 @@ function showTokenControlsButton(controls) {
 				icon: 'fa-solid fa-r',
 				visible: true,
 				toggle: true,
-				onClick: acdcMenu,
+				onClick: changeDiceRollConfig,
 				button: true,
 				active,
 				toolclip,
@@ -46,14 +50,23 @@ function showTokenControlsButton(controls) {
 	}
 }
 
-function acdcMenu() {
-	const cprManualRollToggle = game.modules.get('chris-premades')?.active ? game.settings.get('acdc', 'cprManualRollToggle') : false;
-	if (cprManualRollToggle || !event.shiftKey) return changeDiceRollConfig();
-	else {
-		if (game.version > 13) return new foundry.applications.settings.menus.DiceConfig().render(true);
-		else return new DiceConfig().render(true);
-	}
-}
+Hooks.on('renderSceneControls', () => {
+	const btn = document.querySelector('button[data-tool="acdc"]');
+	if (!btn) return;
+
+	btn.addEventListener(
+		'click',
+		(ev) => {
+			if (ev.shiftKey) {
+				ev.stopImmediatePropagation();
+				if (isV13) new foundry.applications.settings.menus.DiceConfig().render(true);
+				else new DiceConfig().render(true);
+			}
+		},
+		true
+	);
+});
+
 async function changeDiceRollConfig() {
 	const cprManualRollToggle = game.modules.get('chris-premades')?.active ? game.settings.get('acdc', 'cprManualRollToggle') : false;
 	if (cprManualRollToggle) {
@@ -109,7 +122,7 @@ Hooks.on('renderDiceConfig', (app, html) => {
 });
 
 Hooks.once('init', () => {
-	function cprIntegrationSettings () {
+	function cprIntegrationSettings() {
 		game.settings.register('acdc', 'cprManualRollToggle', {
 			name: 'ACDC.CPR_INTEGRATION_TOGGLE.NAME',
 			hint: 'ACDC.CPR_INTEGRATION_TOGGLE.HINT',
@@ -118,13 +131,12 @@ Hooks.once('init', () => {
 			default: false,
 			type: Boolean,
 		});
-	};
+	}
 	const cprModule = game.modules.get('chris-premades');
 	if (cprModule?.active) {
-		if (game.version < 13 && foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
+		if (!isV13 && foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
 			Hooks.once('cprInitComplete', cprIntegrationSettings);
-		}
-		else cprIntegrationSettings();
+		} else cprIntegrationSettings();
 	}
 	game.settings.register('acdc', 'manualDice', {
 		name: 'Manual Dice Selection',
@@ -145,25 +157,33 @@ Hooks.once('init', () => {
 		editable: [{ key: 'KeyB' }],
 		restricted: false,
 		reservedModifiers: ['Control', 'Shift'],
-	});
-});
+		onDown: (ctx) => {
+			const ev = ctx.event;
+			const activeControl = isV13 ? ui.controls.control.name === 'tokens' : ui.controls.activeControl === 'token';
+			if (ev.shiftKey && activeControl) {
+				if (isV13) {
+					new foundry.applications.settings.menus.DiceConfig().render(true);
+				} else {
+					new DiceConfig().render(true);
+				}
+				return true;
+			}
 
-Hooks.on('ready', () => {
-	document.addEventListener('keydown', (event) => {
-		const active = document.activeElement;
-		const isTypingPlain = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
-		const isTypingEditor = active && active.isContentEditable;
+			// should ctrl+B toggle ACDC mode only when the token controls are active? Worth trying to make it global?
+			if (ev.ctrlKey) {
+				const btn = document.querySelector('button[data-tool="acdc"]');
+				if (btn) {
+					btn.dispatchEvent(
+						new MouseEvent('click', {
+							bubbles: true,
+							cancelable: true,
+						})
+					);
+				}
+				return true;
+			}
 
-		// We only support the shortcut with modifiers.
-		if (!event.ctrlKey && !event.shiftKey) return;
-		// The WYSIWYG editor uses CTRL+B to toggle bold --> no shortcut in there.
-		if (isTypingEditor) return;
-		// In the normal editor we ignore SHIFT+B because writing a literal B is something people want to do....
-		if (isTypingPlain && event.shiftKey) return;
-
-		if (game.keybindings.get('acdc', 'keybind').some((k) => k.key === event.code)) {
-			event.preventDefault();
-			acdcMenu();
-		}
+			return false;
+		},
 	});
 });
