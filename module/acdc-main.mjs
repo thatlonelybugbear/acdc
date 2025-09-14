@@ -15,7 +15,7 @@ function showTokenControlsButton(controls) {
 			shiftClick: { heading: 'DICE.CONFIG.Label', reference: 'CONTROLS.ShiftClick' },
 		},
 	};
-	if (isV13) {
+	if (isV13()) {
 		const tools = controls.tokens?.tools;
 		if (tools) {
 			const order = Object.keys(tools).findLastIndex((i) => i) + 1;
@@ -59,7 +59,7 @@ Hooks.on('renderSceneControls', () => {
 		(ev) => {
 			if (ev.shiftKey) {
 				ev.stopImmediatePropagation();
-				if (isV13) new foundry.applications.settings.menus.DiceConfig().render(true);
+				if (isV13()) new foundry.applications.settings.menus.DiceConfig().render(true);
 				else new DiceConfig().render(true);
 			}
 		},
@@ -134,7 +134,7 @@ Hooks.once('init', () => {
 	}
 	const cprModule = game.modules.get('chris-premades');
 	if (cprModule?.active) {
-		if (!isV13 && foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
+		if (!isV13() && foundry.utils.isNewerVersion(cprModule.version, '1.2.41')) {
 			Hooks.once('cprInitComplete', cprIntegrationSettings);
 		} else cprIntegrationSettings();
 	}
@@ -159,9 +159,9 @@ Hooks.once('init', () => {
 		reservedModifiers: ['Control', 'Shift'],
 		onDown: (ctx) => {
 			const ev = ctx.event;
-			const activeControl = isV13 ? ui.controls.control.name === 'tokens' : ui.controls.activeControl === 'token';
+			const activeControl = isV13() ? ui.controls.control.name === 'tokens' : ui.controls.activeControl === 'token';
 			if (ev.shiftKey && activeControl) {
-				if (isV13) {
+				if (isV13()) {
 					new foundry.applications.settings.menus.DiceConfig().render(true);
 				} else {
 					new DiceConfig().render(true);
