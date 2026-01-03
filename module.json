@@ -13,7 +13,6 @@
     ],
     "compatibility": {
         "minimum": "12",
-        "maximum": "14",
         "verified": "13.351"
     },
     "esmodules": ["module/acdc-main.mjs"],
