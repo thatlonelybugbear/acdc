@@ -18,7 +18,7 @@ function showTokenControlsButton(controls) {
 	if (isV13()) {
 		const tools = controls.tokens?.tools;
 		if (tools) {
-			const order = Object.keys(tools).findLastIndex((i) => i) + 1;
+			const order = Object.keys(tools).length;
 			tools.acdc = {
 				name: 'acdc',
 				order,
