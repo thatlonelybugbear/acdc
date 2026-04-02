@@ -1,3 +1,6 @@
+## v14.359.1
+* Verified compatibility with Foundry v14.359
+
 ## v13.348.3
 * Rework the keybinds to use Foundry's API.
 
