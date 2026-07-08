@@ -1,16 +1,57 @@
 {
   "ACDC": {
     "ButtonHint": "Alter Core Dice Configuration",
-    "Manual": "Foundry dice rolls are now manual!",
-    "Auto": "Foundry dice rolls are now automatic!",
-    "SelectedManual": "User selected Foundry dice rolls are now manual!",
     "Config": "ACDC Controls",
     "ToggleMode": "Toggle Mode",
     "Keybind": "Toggle ACDC rolling mode",
-    "CPR_INTEGRATION_TOGGLE": {
-      "NAME": "Toggle the CPR Manual Rolls",
-      "HINT": "You will need to revise the CPR Manual Rolls settings too to make this work properly",
-      "Manual": "Foundry dice rolls now use CPR Manual Rolls dialog!"
+    "LinksMenu": {
+      "Name": "Module Support",
+      "Label": "Links",
+      "Hint": "Open ACDC documentation, issue tracker, and support links.",
+      "GitHubMessage": "GitHub Links",
+      "DiscordMessage": "Enter the Den",
+      "SupportMessage": "Toss a Coin to your Bugbear",
+      "Title": "Resources & Support: ACDC"
+    },
+    "Modes": {
+      "auto": {
+        "Label": "Automatic",
+        "Notification": "Foundry dice rolls are now automatic!"
+      },
+      "manual": {
+        "Label": "Manual",
+        "Notification": "Foundry dice rolls are now manual!"
+      },
+      "smart": {
+        "Label": "Smart routing",
+        "Notification": "Foundry dice rolls are now using ACDC smart routing!"
+      }
+    },
+    "Settings": {
+      "RollMode": {
+        "Name": "ACDC roll mode",
+        "Hint": "Choose whether ACDC sets dice fulfillment to automatic, native manual, or smart routing."
+      },
+      "ManualRollTypes": {
+        "Name": "Smart routing roll types",
+        "Hint": "Select roll types to resolve manually while other roll types roll automatically. If none are selected, ACDC toggles all rolls between automatic and manual."
+      },
+      "ManualNonRegisteredDenominations": {
+        "Name": "Include non-registered denominations",
+        "Hint": "Include denominations not registered in Foundry's dice fulfillment settings, such as 1d7, in manual or smart-routed rolls."
+      },
+      "RollTypes": {
+        "attack": "Attack rolls",
+        "initiative": "Initiative rolls",
+        "damage": "Damage rolls",
+        "healing": "Healing rolls",
+        "skill": "Skill checks",
+        "tool": "Tool checks",
+        "save": "Saving throws",
+        "deathSave": "Death saving throws",
+        "concentration": "Concentration checks",
+        "check": "Ability checks"
+      }
     }
   }
 }

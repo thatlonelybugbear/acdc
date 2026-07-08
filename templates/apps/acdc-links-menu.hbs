@@ -1,0 +1,44 @@
+<section class='acdc-links-menu-body'>
+	<div class='acdc-links-group'>
+		<div class='acdc-links-menu-label'>
+			{{localize "ACDC.LinksMenu.GitHubMessage"}}
+		</div>
+		<div class='acdc-links-row acdc-links-row-primary'>
+			{{#each primaryLinks}}
+				<button type='button' class='acdc-links-menu-button' data-action='openLink' data-url='{{url}}'>
+					<i class='{{icon}}' inert></i>
+					<span>{{label}}</span>
+				</button>
+			{{/each}}
+		</div>
+	</div>
+
+	<div class='acdc-links-row acdc-links-row-combined'>
+		<div class='acdc-links-group'>
+			<div class='acdc-links-menu-label'>
+				{{localize "ACDC.LinksMenu.DiscordMessage"}}
+			</div>
+			<div class='acdc-links-row acdc-links-row-secondary'>
+				{{#each secondaryLinks}}
+					<button type='button' class='acdc-links-menu-button' data-action='openLink' data-url='{{url}}'>
+						<i class='{{icon}}' inert></i>
+						<span>{{label}}</span>
+					</button>
+				{{/each}}
+			</div>
+		</div>
+		<div class='acdc-links-group'>
+			<div class='acdc-links-menu-label'>
+				{{localize "ACDC.LinksMenu.SupportMessage"}}
+			</div>
+			<div class='acdc-links-row acdc-links-row-tertiary'>
+				{{#each tertiaryLinks}}
+					<button type='button' class='acdc-links-menu-button' data-action='openLink' data-url='{{url}}'>
+						<i class='{{icon}}' inert></i>
+						<span>{{label}}</span>
+					</button>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+</section>
