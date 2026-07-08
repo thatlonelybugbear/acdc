@@ -83,7 +83,8 @@ Hooks.on('acdcRegisterSmartRollTypes', (api) => {
 
 The `test` function receives the `Roll` and the current dice term. Return `true` when the roll or dice term belongs to that smart routing type.
 
-So we could also register a smart routing type for `d20Advantage` like:
+## Smart route d20adv
+We could also register a smart routing type for `d20Advantage` like:
 
 ```js
 api.registerSmartRollType({
