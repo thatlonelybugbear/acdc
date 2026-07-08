@@ -1,3 +1,19 @@
+## v14.364.1
+* Verified compatibility with Foundry v14.364
+* Raised the minimum supported Foundry version to v14.
+* Added smart routing settings for dnd5e.
+  * Choose which supported roll types use the manual resolver.
+  * Other roll types are rolled automatically.
+  * Optionally include non-registered dice denominations, such as 1d7, in manual or smart-routed rolls.
+* Reworked the ACDC toggle for Foundry v14's dice fulfillment workflow.
+  * With no smart routing options enabled, the ACDC button toggles all rolls between automatic and manual.
+  * With smart routing options enabled, the ACDC button toggles between automatic and ACDC smart routing.
+* Added an ACDC smart routing API so other systems and modules can register their own roll type detection. See the README for the API example.
+  * The smart routing API is available from ACDC v14.364.1 onward.
+* Added a Resources & Support menu with README, Issues, Discord, Ko-Fi, and Patreon links.
+* Removed the CPR Manual Rolls integration for now. It can be reworked later when that module is active again.
+* Removed pre-v14 compatibility code.
+
 ## v14.359.1
 * Verified compatibility with Foundry v14.359
 
@@ -17,14 +33,7 @@
 ## v13.347.1
 * Foundry v13.347 compatibility bump
 
-## v13.346.2
-- Quick fix for when the ACDC setting for CPR is not registered.
-
 ## v13.346.1
-- CPR Manual Rolls integration
-  - If CPR is active and the ACDC setting is set to use CPR's manual rolls, the toggle button will **only** enable/disable the CPR's Manual Rolls option.
-  - The GM will still need to set all the right CPR's Manual Rolls settings as needed for the users etc.
-  - Let me know of bugs or what else might be needed.
 - Verified for Foundry v13.346
  
 ## v13.345.1
