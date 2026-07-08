@@ -10,6 +10,7 @@
   * With smart routing options enabled, the ACDC button toggles between automatic and ACDC smart routing.
 * Added an ACDC smart routing API so other systems and modules can register their own roll type detection. See the README for the API example.
   * The smart routing API is available from ACDC v14.364.1 onward.
+  * Check the 4e example at <https://github.com/thatlonelybugbear/acdc#smart-routing-api-example-v143641>
 * Added a Resources & Support menu with README, Issues, Discord, Ko-Fi, and Patreon links.
 * Removed the CPR Manual Rolls integration for now. It can be reworked later when that module is active again.
 * Removed pre-v14 compatibility code.
