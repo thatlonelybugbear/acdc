@@ -1,45 +1,58 @@
 {
-    "id": "acdc",
-    "title": "Alter Core Dice Configuration",
-    "description": "A small module to set Foundry core dice configuration",
-    "version": "14.364.1",
-    "authors": [
-        {
-            "name": "thatlonelybugbear",
-            "url": "https://github.com/thatlonelybugbear",
-            "discord": "thatlonelybugbear#4394",
-            "ko-fi": "https://ko-fi.com/thatlonelybugbear"
-        }
-    ],
-    "compatibility": {
-        "minimum": "14",
-        "verified": "14.364"
+  "id": "acdc",
+  "title": "Alter Core Dice Configuration",
+  "description": "A small module to set Foundry core dice configuration",
+  "version": "14.365.1",
+  "authors": [
+    {
+      "name": "thatlonelybugbear",
+      "url": "https://github.com/thatlonelybugbear",
+      "discord": "thatlonelybugbear#4394",
+      "ko-fi": "https://ko-fi.com/thatlonelybugbear",
+      "flags": {}
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.365",
+    "maximum": "14"
+  },
+  "esmodules": [
+    "module/acdc-main.mjs"
+  ],
+  "styles": [
+    {
+      "src": "styles/acdc.css"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
     },
-    "esmodules": ["module/acdc-main.mjs"],
-    "styles": ["styles/acdc.css"],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "lang/en.json",
-            "flags": {}
-        },
-        {
-            "lang": "it",
-            "name": "Italiano",
-            "path": "lang/it.json"
-        }
-    ],
-    "flags": {
-        "hotReload": {
-            "extensions": ["json"],
-            "paths": ["lang/en.json"]
-        }
-    },
-    "bugs": "https://github.com/thatlonelybugbear/acdc/issues",
-    "url": "https://github.com/thatlonelybugbear/acdc",
-    "license": "https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/LICENSE",
-    "manifest": "https://github.com/thatlonelybugbear/acdc/releases/latest/download/module.json",
-    "download": "https://github.com/thatlonelybugbear/acdc/releases/download/v14.364.1/module.zip",
-    "changelog": "https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/Changelog.md"
+    {
+      "lang": "it",
+      "name": "Italiano",
+      "path": "lang/it.json",
+      "flags": {}
+    }
+  ],
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "json"
+      ],
+      "paths": [
+        "lang/en.json"
+      ]
+    }
+  },
+  "bugs": "https://github.com/thatlonelybugbear/acdc/issues",
+  "url": "https://github.com/thatlonelybugbear/acdc",
+  "license": "https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/LICENSE",
+  "manifest": "https://github.com/thatlonelybugbear/acdc/releases/latest/download/module.json",
+  "download": "https://github.com/thatlonelybugbear/acdc/releases/download/v14.365.1/module.zip",
+  "changelog": "https://raw.githubusercontent.com/thatlonelybugbear/acdc/main/Changelog.md"
 }

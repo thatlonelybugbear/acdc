@@ -91,7 +91,7 @@ class SmartRollResolver extends foundry.applications.dice.RollResolver {
 }
 
 function showTokenControlsButton(controls) {
-	if (!game.permissions.MANUAL_ROLLS.includes(game.user.role)) return;
+	if (!canToggleCatManualRolls() && !game.permissions.MANUAL_ROLLS.includes(game.user.role)) return;
 	const active = getRollMode() !== 'auto';
 	const toolclip = {
 		src: 'modules/acdc/assets/acdcRollConfig.webm',
@@ -145,20 +145,32 @@ function localize(string) {
 }
 
 function getRollMode() {
+	if (canToggleCatManualRolls()) return game.settings.get('cat', 'manualRollsEnabled') ? 'manual' : 'auto';
 	if (!game.settings.settings.has('acdc.rollMode')) return 'auto';
 	const mode = game.settings.get('acdc', 'rollMode');
 	return ROLL_MODES.includes(mode) ? mode : 'auto';
 }
 
 async function setRollMode(mode) {
+	if (canToggleCatManualRolls()) {
+		await game.settings.set('cat', 'manualRollsEnabled', mode !== 'auto');
+		return;
+	}
 	await game.settings.set('acdc', 'rollMode', mode);
 	await game.settings.set('core', Roll.DICE_CONFIGURATION_SETTING, buildDiceConfiguration(mode));
 }
 
 function getNextRollMode() {
 	const mode = getRollMode();
+	if (canToggleCatManualRolls()) return mode === 'auto' ? 'manual' : 'auto';
 	const enabledMode = hasSmartRollTypes() ? 'smart' : 'manual';
 	return mode === 'auto' ? enabledMode : 'auto';
+}
+
+function canToggleCatManualRolls() {
+	if (!game.user.isGM || !game.modules.get('cat')?.active) return false;
+	if (!game.settings.settings.has('cat.manualRollsEnabled') || !game.settings.settings.has('cat.manualRollsUsers')) return false;
+	return !!game.settings.get('cat', 'manualRollsUsers')?.length;
 }
 
 function buildDiceConfiguration(mode) {
@@ -230,7 +242,9 @@ Hooks.once('init', () => {
 		config: false,
 		type: String,
 		default: 'auto',
-		onChange: (mode) => game.settings.set('core', Roll.DICE_CONFIGURATION_SETTING, buildDiceConfiguration(mode)),
+		onChange: (mode) => {
+			if (!canToggleCatManualRolls()) game.settings.set('core', Roll.DICE_CONFIGURATION_SETTING, buildDiceConfiguration(mode));
+		},
 	});
 
 	game.settings.register('acdc', 'manualRollTypes', {
