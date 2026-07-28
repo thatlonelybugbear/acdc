@@ -1,4 +1,4 @@
-## Next
+## v14.365.1
 * Added minimal CAT manual-roll integration:
   * When CAT has manual-roll users configured, the GM ACDC button toggles CAT's main manual-roll switch.
   * ACDC leaves CAT's dice configuration, resolver, inclusion rules, and per-user manual-roll settings under CAT control.
