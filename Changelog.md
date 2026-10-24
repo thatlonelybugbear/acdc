@@ -1,4 +1,11 @@
-## v14.365.1
+## v14.369.1
+* Updated Foundry compatibility metadata to v14.369.
+* Improved CAT manual-roll integration:
+  * Require configured manual-roll users and an inclusion rule before enabling CAT through ACDC. An enabled switch can always be turned off by a GM.
+  * While CAT controls manual rolls, disable ACDC smart routing and non-GM controls, and block ACDC's native dice-configuration shortcuts.
+  * Refresh the ACDC button when CAT manual-roll settings change.
+
+## 14.365.1
 * Added minimal CAT manual-roll integration:
   * When CAT has manual-roll users configured, the GM ACDC button toggles CAT's main manual-roll switch.
   * ACDC leaves CAT's dice configuration, resolver, inclusion rules, and per-user manual-roll settings under CAT control.

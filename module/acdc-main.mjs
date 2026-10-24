@@ -91,6 +91,7 @@ class SmartRollResolver extends foundry.applications.dice.RollResolver {
 }
 
 function showTokenControlsButton(controls) {
+	if (isCatControllingManualRolls() && !canToggleCatManualRolls()) return;
 	if (!canToggleCatManualRolls() && !game.permissions.MANUAL_ROLLS.includes(game.user.role)) return;
 	const active = getRollMode() !== 'auto';
 	const toolclip = {
@@ -127,6 +128,7 @@ Hooks.on('renderSceneControls', () => {
 		(ev) => {
 			if (ev.shiftKey) {
 				ev.stopImmediatePropagation();
+				if (isCatControllingManualRolls()) return;
 				new foundry.applications.settings.menus.DiceConfig().render(true);
 			}
 		},
@@ -135,6 +137,7 @@ Hooks.on('renderSceneControls', () => {
 });
 
 async function changeDiceRollConfig() {
+	if (isCatControllingManualRolls() && !canToggleCatManualRolls()) return;
 	const mode = getNextRollMode();
 	await setRollMode(mode);
 	ui.notifications.info(localize(`ACDC.Modes.${mode}.Notification`));
@@ -145,15 +148,15 @@ function localize(string) {
 }
 
 function getRollMode() {
-	if (canToggleCatManualRolls()) return game.settings.get('cat', 'manualRollsEnabled') ? 'manual' : 'auto';
+	if (isCatControllingManualRolls()) return game.settings.get('cat', 'manualRollsEnabled') ? 'manual' : 'auto';
 	if (!game.settings.settings.has('acdc.rollMode')) return 'auto';
 	const mode = game.settings.get('acdc', 'rollMode');
 	return ROLL_MODES.includes(mode) ? mode : 'auto';
 }
 
 async function setRollMode(mode) {
-	if (canToggleCatManualRolls()) {
-		await game.settings.set('cat', 'manualRollsEnabled', mode !== 'auto');
+	if (isCatControllingManualRolls()) {
+		if (canToggleCatManualRolls()) await game.settings.set('cat', 'manualRollsEnabled', mode !== 'auto');
 		return;
 	}
 	await game.settings.set('acdc', 'rollMode', mode);
@@ -168,10 +171,20 @@ function getNextRollMode() {
 }
 
 function canToggleCatManualRolls() {
-	if (!game.user.isGM || !game.modules.get('cat')?.active) return false;
-	if (!game.settings.settings.has('cat.manualRollsEnabled') || !game.settings.settings.has('cat.manualRollsUsers')) return false;
-	return !!game.settings.get('cat', 'manualRollsUsers')?.length;
+	return game.user.isGM && isCatControllingManualRolls();
 }
+
+function isCatControllingManualRolls() {
+	if (!game.modules.get('cat')?.active) return false;
+	if (!['manualRollsEnabled', 'manualRollsUsers', 'manualRollsInclusion'].every((key) => game.settings.settings.has(`cat.${key}`))) return false;
+	return game.settings.get('cat', 'manualRollsEnabled') || (!!game.settings.get('cat', 'manualRollsUsers')?.length && game.settings.get('cat', 'manualRollsInclusion') > 0);
+}
+
+Hooks.on('updateSetting', (setting) => {
+	if (['cat.manualRollsEnabled', 'cat.manualRollsUsers', 'cat.manualRollsInclusion'].includes(setting.key) && ui.controls?.rendered) {
+		ui.controls.render({ reset: true });
+	}
+});
 
 function buildDiceConfiguration(mode) {
 	const config = foundry.utils.deepClone(game.settings.get('core', Roll.DICE_CONFIGURATION_SETTING) ?? {});
@@ -243,7 +256,7 @@ Hooks.once('init', () => {
 		type: String,
 		default: 'auto',
 		onChange: (mode) => {
-			if (!canToggleCatManualRolls()) game.settings.set('core', Roll.DICE_CONFIGURATION_SETTING, buildDiceConfiguration(mode));
+			if (!isCatControllingManualRolls()) game.settings.set('core', Roll.DICE_CONFIGURATION_SETTING, buildDiceConfiguration(mode));
 		},
 	});
 
@@ -278,6 +291,7 @@ Hooks.once('init', () => {
 			const ev = ctx.event;
 			const tokenControlsActive = ui.controls.control?.name === 'tokens';
 			if (ev.shiftKey && tokenControlsActive) {
+				if (isCatControllingManualRolls()) return false;
 				new foundry.applications.settings.menus.DiceConfig().render(true);
 				return true;
 			}
@@ -323,7 +337,7 @@ function registerSmartRollResolverFor(RollClass) {
 		configurable: true,
 		get() {
 			const config = game.settings.get('core', Roll.DICE_CONFIGURATION_SETTING);
-			if (hasManualFulfillmentDice(config) && getRollMode() === 'smart') return SmartRollResolver;
+			if (!isCatControllingManualRolls() && hasManualFulfillmentDice(config) && getRollMode() === 'smart') return SmartRollResolver;
 			return descriptor.get.call(this);
 		},
 	});
